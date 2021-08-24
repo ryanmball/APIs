@@ -11,7 +11,7 @@ until word == "quit"
 
   get_definition = HTTP.get("https://api.wordnik.com/v4/word.json/#{word}/definitions?limit=200&includeRelated=false&useCanonical=false&includeTags=false&api_key=zoykch8rrpuv19tuv0o2igg7ketsgrcz213sank54les4zjfv")
 
-  definition_data = get_definition.parse
+  definition_data = get_definition.parse(:json)
   definition = definition_data[0]["text"]
 
   puts "Word: #{word}"
@@ -19,20 +19,20 @@ until word == "quit"
 
   get_example = HTTP.get("https://api.wordnik.com/v4/word.json/#{word}/topExample?useCanonical=false&api_key=zoykch8rrpuv19tuv0o2igg7ketsgrcz213sank54les4zjfv")
 
-  example_data = get_example.parse
+  example_data = get_example.parse(:json)
   example = example_data["text"]
 
   puts "Example usage: #{example}"
 
   get_pronunciation = HTTP.get("https://api.wordnik.com/v4/word.json/#{word}/pronunciations?useCanonical=false&limit=50&api_key=zoykch8rrpuv19tuv0o2igg7ketsgrcz213sank54les4zjfv")
 
-  pronunciation_data = get_pronunciation.parse
+  pronunciation_data = get_pronunciation.parse(:json)
   pronunciation = pronunciation_data[0]["raw"]
 
   puts "Pronunciation: #{pronunciation}"
 
   get_audio = HTTP.get("https://api.wordnik.com/v4/word.json/#{word}/audio?useCanonical=false&limit=50&api_key=zoykch8rrpuv19tuv0o2igg7ketsgrcz213sank54les4zjfv")
-  audio_data = get_audio.parse
+  audio_data = get_audio.parse(:json)
   audio = audio_data[0]["fileUrl"]
   system("open", audio)
 

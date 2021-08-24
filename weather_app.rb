@@ -7,7 +7,7 @@ city = gets.chomp
 
 response = HTTP.get("https://api.openweathermap.org/data/2.5/weather?q=#{city}&units=imperial&APPID=APIKEYHERE")
 
-weather_data = response.parse
+weather_data = response.parse(:json)
 
 temperatue = weather_data["main"]["temp"]
 description = weather_data["weather"][0]["description"]
